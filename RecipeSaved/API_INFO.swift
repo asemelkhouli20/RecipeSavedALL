@@ -9,11 +9,12 @@ import Foundation
 
 struct API_INFO {
     
-    let API_KEY = "ef816e5fbc756632771868a28fbf5d54"
-    let API_ID = "7b0337dd"
+    static let API_KEY = "ef816e5fbc756632771868a28fbf5d54"
+    static let API_ID = "7b0337dd"
     
-    func getApi(search:String)->String{
-        let urlAPI = "https://api.edamam.com/api/recipes/v2?type=public&beta=false&q=\(search)&app_id=\(API_ID)&app_key=\(API_KEY)&random=true"
+    static func getApi(search:String?)->String{
+        
+        let urlAPI = "https://api.edamam.com/api/recipes/v2?type=public&beta=false&q=\(search ?? "random")&app_id=\(API_ID)&app_key=\(API_KEY)&random=true"
         return urlAPI
     }
 }
