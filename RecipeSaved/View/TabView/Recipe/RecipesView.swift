@@ -9,17 +9,18 @@ import SwiftUI
 
 struct RecipesView: View {
     @State private var search = ""
-    @State private var isLoading = false
+    
+    @StateObject var viewModel = ViewModel()
     var body: some View {
         NavigationView{
             ZStack{
-                if isLoading {
+                if viewModel.isLoading {
                 ProgressView()
                     .progressViewStyle(.circular)
                     .scaleEffect(2)
                     .tint(Color("primary"))
                 }else{
-                    RecipeList(recipes: RecipeModel.all)
+                    RecipeList(recipes: viewModel.recipes)
 
                 }
                 

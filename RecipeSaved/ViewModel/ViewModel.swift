@@ -9,8 +9,10 @@ import SwiftUI
 
 class ViewModel : ObservableObject {
     @Published var recipes = [Recipe]()
+    @Published var isLoading = true
     
     init(){
+        fetch(ser: nil)
         fetch(ser: nil)
     }
     
@@ -19,13 +21,19 @@ class ViewModel : ObservableObject {
         print(API_INFO.getApi(search: ser))
         
         URLSession.shared.dataTask(with: url) { data, _, error in
-            print(data!)
+            
             if let data = data {
                 do{
                     let task = try JSONDecoder().decode(main.self, from: data)
-                    print(data)
-                    
-                    print(task)
+                    for item in task.hits {
+                        DispatchQueue.main.async {
+                            self.recipes.append(item.recipe)
+                        }
+                    }
+                    DispatchQueue.main.async {
+                        self.isLoading=false
+
+                    }
                 }catch{
                     print("error error")
                 }

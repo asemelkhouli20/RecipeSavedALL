@@ -8,7 +8,7 @@
 import SwiftUI
 
 struct RecipeList: View {
-    var recipes : [RecipeModel]
+    var recipes : [Recipe]
     var body: some View {
         ScrollView{
             LazyVGrid(columns: [GridItem(.adaptive(minimum: 160),spacing: 15)],spacing: 15) {
@@ -29,11 +29,11 @@ struct RecipeList: View {
         }
     }
 }
-
-struct RecipeList_Previews: PreviewProvider {
-    static var previews: some View {
-        NavigationView{
-        RecipeList(recipes: [RecipeModel.MockData])
-        }
-    }
-}
+//
+//struct RecipeList_Previews: PreviewProvider {
+//    static var previews: some View {
+//        NavigationView{
+//        RecipeList(recipes: [RecipeModel.MockData])
+//        }
+//    }
+//}

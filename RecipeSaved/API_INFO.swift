@@ -17,6 +17,13 @@ struct API_INFO {
         let urlAPI = "https://api.edamam.com/api/recipes/v2?type=public&beta=false&q=\(search ?? "random")&app_id=\(API_ID)&app_key=\(API_KEY)&random=true"
         return urlAPI
     }
+    static func getString(array:[String])->String{
+        var string = ""
+        for a in array {
+            string=string+a
+        }
+        return string
+    }
 }
 
 

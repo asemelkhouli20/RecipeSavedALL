@@ -8,12 +8,12 @@
 import SwiftUI
 
 struct RecipeDetailsView: View {
-    var recipe:RecipeModel
+    var recipe:Recipe
     @State var showDetailsView=false
     var body: some View {
         ScrollView{
             VStack(alignment: .leading){
-                ImageCover(image: recipe.image, name: recipe.name)
+                ImageCover(image: recipe.image, name: recipe.label)
                 
                 VStack(alignment: .leading){
                     
@@ -21,8 +21,8 @@ struct RecipeDetailsView: View {
                         showDetailsView = true
                     } label: { CustomButton(text: "Calories 1445 for 4 Servings") }
                     
-                    DescriptionView()
-                    IngredientsView()
+                    DescriptionView(meal: API_INFO.getString(array: recipe.mealType) , dish: API_INFO.getString(array: recipe.dishType), cuisine: API_INFO.getString(array: recipe.cuisineType), cautions: API_INFO.getString(array: recipe.cautions))
+                    IngredientsView(ingredients: recipe.ingredients)
 
                     Button {
                         
@@ -44,25 +44,32 @@ struct RecipeDetailsView: View {
     }
 }
 
-struct RecipeDetailsView_Previews: PreviewProvider {
-    static var previews: some View {
-        RecipeDetailsView(recipe: RecipeModel.MockData)
-            .preferredColorScheme(.dark)
-    }
-}
+//struct RecipeDetailsView_Previews: PreviewProvider {
+//    static var previews: some View {
+//        RecipeDetailsView(recipe: RecipeModel.MockData)
+//            .preferredColorScheme(.dark)
+//    }
+//}
 
 
 
 struct DescriptionView: View {
+    var meal:String
+    var dish:String
+    var cuisine:String
+    var cautions:String
     var body: some View {
         VStack(alignment: .leading, spacing: 5.0){
             Text("Description")
                 .font(.title2)
             VStack(alignment: .leading, spacing: 5.0){
-                Text("Meal Type :- lunch/dinner")
-                Text("Dish Type :- salad")
-                Text("cuisine Type :- american/mediterranean")
-                Text("cautions :- Sulfites")
+                Text("Meal Type :- \(meal)")
+                Text("Dish Type :- \(dish)")
+                Text("Cuisine Type :- \(cuisine)")
+                if cautions != "" {
+                    Text("Cautions :- \(cautions)")
+                }
+                
             }
             .padding(.horizontal)
         }
@@ -123,13 +130,18 @@ struct CustomButton: View {
 }
 
 struct IngredientsView: View {
+    var ingredients : [Ingredients]
     var body: some View {
         Section {
-                ForEach(1..<5){_ in
-                    IngredientsCard()
-                
+            if ingredients.count >= 1 {
+                ForEach(0..<ingredients.count){i in
+                        IngredientsCard(ingredients: ingredients[i])
+                        
+                    
+                }
+                    .padding(.horizontal,5)
             }
-                .padding(.horizontal,5)
+            
         } header: {
             Text("Ingredients")
                 .font(.title3)
