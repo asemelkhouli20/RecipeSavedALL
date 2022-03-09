@@ -12,6 +12,12 @@ struct API_INFO {
     static let API_KEY = "ef816e5fbc756632771868a28fbf5d54"
     static let API_ID = "7b0337dd"
     
+    static let mealType = ["Breakfast","Lunch","Dinner","Snack","Teatime"]
+    
+    static let dishType = ["Alcohol-cocktail","Biscuits and cookies","Bread","Cereals","Condiments and sauces","Drinks","Desserts","Egg","Main course","Omelet","Pancake","Preps","Preserve","Salad","Sandwiches","Soup","Starter"]
+    
+    static let cuisineType = ["American","Asian","British","Caribbean","Central Europe","Chinese","Eastern Europe","French","Indian","Italian","Japanese","Kosher","Mediterranean","Mexican","Middle Eastern","Nordic","South American","South East Asian"]
+    
     static func getApi(search:String?)->String{
         
         let urlAPI = "https://api.edamam.com/api/recipes/v2?type=public&beta=false&q=\(search ?? "random")&app_id=\(API_ID)&app_key=\(API_KEY)&random=true"

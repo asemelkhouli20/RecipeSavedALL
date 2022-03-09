@@ -24,11 +24,11 @@ struct RecipeDetailsView: View {
                     DescriptionView(meal: API_INFO.getString(array: recipe.mealType) , dish: API_INFO.getString(array: recipe.dishType), cuisine: API_INFO.getString(array: recipe.cuisineType), cautions: API_INFO.getString(array: recipe.cautions))
                     IngredientsView(ingredients: recipe.ingredients)
 
-                    Button {
-                        
-                    } label: {
-                        CustomButton(text: "More Info")
-                    }
+                   
+                    Link(destination: URL(string: recipe.url)! ) {
+                            CustomButton(text: "More Info")
+                        }
+                   
 
                     
                 }

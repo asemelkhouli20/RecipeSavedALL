@@ -12,7 +12,7 @@ struct Details: View {
     @Environment(\.dismiss) var dismiss
     var body: some View {
         ScrollView{
-            LazyVGrid(columns: [GridItem(.adaptive(minimum: 300))],spacing: 5) {
+            LazyVGrid(columns: [GridItem(.adaptive(minimum: 320))],spacing: 5) {
                 let itemShow = API_INFO.getString(a: recipe.totalNutrients)
                 let itemShowSecond = API_INFO.getDictionary(b: recipe.totalDaily)
                 ForEach(itemShow,id:\.label) { index in
@@ -38,6 +38,9 @@ struct Details: View {
                     else {
                         
                         CustomItemView(name: index.label, unit: index.unit, quantity: index.quantity,percent: String(format: "%0.1f%%", itemShowSecond[index.label]?.quantity ?? 0)   )
+                            .overlay(RoundedRectangle(cornerRadius: 0)
+                                        .stroke(.gray)
+                            )
                     }
                    
                 }
@@ -86,6 +89,7 @@ struct CustomItemView: View {
         HStack(spacing: 10){
             Text("\(name)"+":")
                 .bold()
+                .lineLimit(1)
             Spacer()
             Text("\(String(format: "%0.2f\(unit)",quantity))")
             Text(percent)
@@ -94,8 +98,6 @@ struct CustomItemView: View {
         .font(.callout)
         .padding()
         .frame(maxWidth:.infinity)
-        .overlay(RoundedRectangle(cornerRadius: 0)
-                    .stroke()
-        )
+        
     }
 }
