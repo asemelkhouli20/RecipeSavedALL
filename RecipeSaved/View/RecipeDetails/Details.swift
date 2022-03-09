@@ -13,8 +13,8 @@ struct Details: View {
     var body: some View {
         ScrollView{
             LazyVGrid(columns: [GridItem(.adaptive(minimum: 320))],spacing: 5) {
-                let itemShow = API_INFO.getString(a: recipe.totalNutrients)
-                let itemShowSecond = API_INFO.getDictionary(b: recipe.totalDaily)
+                let itemShow = Help.getString(a: recipe.totalNutrients)
+                let itemShowSecond = Help.getDictionary(b: recipe.totalDaily)
                 ForEach(itemShow,id:\.label) { index in
                         
                     if index.label.range(of: "Vitamin") != nil{

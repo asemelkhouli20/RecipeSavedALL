@@ -10,6 +10,7 @@ import SwiftUI
 struct RecipesView: View {
     @State private var search = ""
     @State private var showFilter=false
+    @State var fillter=[String]()
     @StateObject var viewModel = ViewModel()
     var body: some View {
         NavigationView{
@@ -26,15 +27,27 @@ struct RecipesView: View {
                 
             }
             .halfSheet(showSheet: $showFilter, sheetView: {
-                FilterView()
-            }, onEnd: {})
+                FilterView(fillter: $fillter, showFilter: $showFilter)
+            }, onEnd: {
+                
+            })
+            .onChange(of: fillter, perform: { newValue in
+                if  fillter != [] {
+                    viewModel.isLoading=true
+                    viewModel.recipes=[]
+                    
+                    viewModel.fetch(ser: nil, fillter: fillter)
+                    
+                }
+            })
             
             .toolbar(content: {
                 ToolbarItem {
                     Button {
                         viewModel.isLoading=true
                         viewModel.recipes=[]
-                        viewModel.fetch(ser: nil)
+                        fillter=[String]()
+                        viewModel.fetch(ser: nil, fillter: nil)
                     } label: {
                         Label("Refresh", systemImage: "arrow.clockwise")
                     }

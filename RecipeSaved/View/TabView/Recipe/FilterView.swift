@@ -11,17 +11,21 @@ struct FilterView: View {
     @State private var mealTypePicker=""
     @State private var dishTypePicker=""
     @State private var cuisineTypePicker=""
+    @Binding var fillter:[String]
+    
+    @Binding var showFilter:Bool
     var body: some View {
         VStack{
             List {
-                filterType(picker: mealTypePicker, array: API_INFO.mealType, text: "meal type")
-                filterType(picker: dishTypePicker, array: API_INFO.dishType, text: "dish Type")
-                filterType(picker: cuisineTypePicker, array: API_INFO.cuisineType, text: "cuisine Type")
+                filterType(picker: $mealTypePicker, array: Help.mealType, text: "meal type")
+                filterType(picker: $dishTypePicker, array: Help.dishType, text: "dish Type")
+                filterType(picker: $cuisineTypePicker, array: Help.cuisineType, text: "cuisine Type")
                
             }
             Button {
+               fillter=[mealTypePicker,dishTypePicker,cuisineTypePicker]
                 
-                
+                showFilter=false
             } label: {
                 Label("Filter", systemImage: "line.3.horizontal.decrease")
                     .foregroundColor(.white)
@@ -39,15 +43,15 @@ struct FilterView: View {
         
     }
 }
-
-struct FilterView_Previews: PreviewProvider {
-    static var previews: some View {
-        FilterView()
-    }
-}
+//
+//struct FilterView_Previews: PreviewProvider {
+//    static var previews: some View {
+//        FilterView()
+//    }
+//}
 
 struct filterType: View {
-    @State var picker:String
+    @Binding var picker:String
     var array:[String]
     var text:String
     var body: some View {
@@ -57,9 +61,6 @@ struct filterType: View {
                 ForEach(array,id: \.self) { i in
                     Text(i).tag(i)
                 }
-                
-                
-                
             }
             .pickerStyle(.menu)
         } header: {

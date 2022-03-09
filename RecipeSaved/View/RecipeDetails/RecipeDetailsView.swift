@@ -21,7 +21,7 @@ struct RecipeDetailsView: View {
                         showDetailsView = true
                     } label: { CustomButton(text: "Calories \( String(format: "%0.0f",recipe.calories)) for \(recipe.yield) Servings") }
                     
-                    DescriptionView(meal: API_INFO.getString(array: recipe.mealType) , dish: API_INFO.getString(array: recipe.dishType), cuisine: API_INFO.getString(array: recipe.cuisineType), cautions: API_INFO.getString(array: recipe.cautions))
+                    DescriptionView(meal: Help.getString(array: recipe.mealType) , dish: Help.getString(array: recipe.dishType), cuisine: Help.getString(array: recipe.cuisineType), cautions: Help.getString(array: recipe.cautions))
                     IngredientsView(ingredients: recipe.ingredients)
 
                    

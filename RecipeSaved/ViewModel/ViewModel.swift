@@ -14,12 +14,12 @@ class ViewModel : ObservableObject {
     private var numberofTry = 3
     
     init(){
-        fetch(ser: nil)
+        fetch(ser: nil, fillter: nil)
     }
     
-    func fetch (ser:String?){
+    func fetch (ser:String?,fillter:[String]?){
         numberofTry=3
-        guard let url = URL(string: API_INFO.getApi(search: ser)) else {return}
+        guard let url = URL(string: API_INFO.getApi(search: ser, fillter: fillter)) else {return}
         URLSession.shared.dataTask(with: url) { data, _, error in
             
             if let data = data {
@@ -35,7 +35,7 @@ class ViewModel : ObservableObject {
                     }
                 }catch{
                     if self.numberofTry != 0{
-                        self.fetch(ser: ser)
+                        self.fetch(ser: ser, fillter: fillter)
                         self.numberofTry-=1
                     }
                 }
