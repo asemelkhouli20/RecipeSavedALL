@@ -12,7 +12,7 @@ extension View {
      //Binding show variable
     func halfSheet<SheetView:View>(showSheet:Binding<Bool>,@ViewBuilder sheetView : @escaping ()->SheetView,onEnd:@escaping ()->())->some View{
         return self
-            .overlay { HalfSheefHelper(sheetView: sheetView(),showSheet: showSheet,onEnd:onEnd ) }
+            .background { HalfSheefHelper(sheetView: sheetView(),showSheet: showSheet,onEnd:onEnd ) }
     }
 }
 
