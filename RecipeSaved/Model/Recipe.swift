@@ -16,7 +16,8 @@ struct item:Decodable{
     let recipe:Recipe
 }
 
-struct Recipe:Decodable {
+struct Recipe:Decodable,Identifiable {
+    let id=UUID()
     let label:String
     let image:String
     let url:String
@@ -46,73 +47,73 @@ struct Digest:Decodable{
     let sub:[Digest]?
 }
 struct TotalNutrients:Decodable{
-    let ENERC_KCAL:     DetailsTotalNutrients
-    let FAT:            DetailsTotalNutrients
-    let FASAT:          DetailsTotalNutrients
-    let FATRN:          DetailsTotalNutrients
-    let FAMS:           DetailsTotalNutrients
-    let FAPU:           DetailsTotalNutrients
-    let CHOCDF:         DetailsTotalNutrients
+    let ENERC_KCAL:     DetailsItem
+    let FAT:            DetailsItem
+    let FASAT:          DetailsItem
+    let FATRN:          DetailsItem
+    let FAMS:           DetailsItem
+    let FAPU:           DetailsItem
+    let CHOCDF:         DetailsItem
 //    let CHOCDF.net:   DetailsTotalNutrients
-    let FIBTG:          DetailsTotalNutrients
-    let SUGAR:          DetailsTotalNutrients
+    let FIBTG:          DetailsItem
+    let SUGAR:          DetailsItem
 //    let SUGAR.added:  DetailsTotalNutrients
-    let PROCNT:         DetailsTotalNutrients
-    let CHOLE:          DetailsTotalNutrients
-    let NA:             DetailsTotalNutrients
-    let CA:             DetailsTotalNutrients
-    let MG:             DetailsTotalNutrients
-    let K:              DetailsTotalNutrients
-    let FE:             DetailsTotalNutrients
-    let ZN:             DetailsTotalNutrients
-    let P:              DetailsTotalNutrients
-    let VITA_RAE:       DetailsTotalNutrients
-    let VITC:           DetailsTotalNutrients
-    let THIA:           DetailsTotalNutrients
-    let RIBF:           DetailsTotalNutrients
-    let NIA:            DetailsTotalNutrients
-    let VITB6A:         DetailsTotalNutrients
-    let FOLDFE:         DetailsTotalNutrients
-    let FOLFD:          DetailsTotalNutrients
-    let FOLAC:          DetailsTotalNutrients
-    let VITB12:         DetailsTotalNutrients
-    let VITD:           DetailsTotalNutrients
-    let TOCPHA:         DetailsTotalNutrients
-    let VITK1:          DetailsTotalNutrients
+    let PROCNT:         DetailsItem
+    let CHOLE:          DetailsItem
+    let NA:             DetailsItem
+    let CA:             DetailsItem
+    let MG:             DetailsItem
+    let K:              DetailsItem
+    let FE:             DetailsItem
+    let ZN:             DetailsItem
+    let P:              DetailsItem
+    let VITA_RAE:       DetailsItem
+    let VITC:           DetailsItem
+    let THIA:           DetailsItem
+    let RIBF:           DetailsItem
+    let NIA:            DetailsItem
+    let VITB6A:         DetailsItem
+    let FOLDFE:         DetailsItem
+    let FOLFD:          DetailsItem
+    let FOLAC:          DetailsItem
+    let VITB12:         DetailsItem
+    let VITD:           DetailsItem
+    let TOCPHA:         DetailsItem
+    let VITK1:          DetailsItem
 //    let Sugar.alcohol:DetailsTotalNutrients
-    let WATER:          DetailsTotalNutrients
+    let WATER:          DetailsItem
 
 }
 struct TotalDaily:Decodable{
-    let ENERC_KCAL: DetailsTotalNutrients
-    let FAT:        DetailsTotalNutrients
-    let FASAT:      DetailsTotalNutrients
-    let CHOCDF:     DetailsTotalNutrients
-    let FIBTG:      DetailsTotalNutrients
-    let PROCNT:     DetailsTotalNutrients
-    let CHOLE:      DetailsTotalNutrients
-    let NA:         DetailsTotalNutrients
-    let CA:         DetailsTotalNutrients
-    let MG:         DetailsTotalNutrients
-    let K:          DetailsTotalNutrients
-    let FE:         DetailsTotalNutrients
-    let ZN:         DetailsTotalNutrients
-    let P:          DetailsTotalNutrients
-    let VITA_RAE:   DetailsTotalNutrients
-    let VITC:       DetailsTotalNutrients
-    let THIA:       DetailsTotalNutrients
-    let RIBF:       DetailsTotalNutrients
-    let NIA:        DetailsTotalNutrients
-    let VITB6A:     DetailsTotalNutrients
-    let FOLDFE:     DetailsTotalNutrients
-    let VITB12:     DetailsTotalNutrients
-    let VITD:       DetailsTotalNutrients
-    let TOCPHA:     DetailsTotalNutrients
-    let VITK1:      DetailsTotalNutrients
+    let ENERC_KCAL: DetailsItem
+    let FAT:        DetailsItem
+    let FASAT:      DetailsItem
+    let CHOCDF:     DetailsItem
+    let FIBTG:      DetailsItem
+    let PROCNT:     DetailsItem
+    let CHOLE:      DetailsItem
+    let NA:         DetailsItem
+    let CA:         DetailsItem
+    let MG:         DetailsItem
+    let K:          DetailsItem
+    let FE:         DetailsItem
+    let ZN:         DetailsItem
+    let P:          DetailsItem
+    let VITA_RAE:   DetailsItem
+    let VITC:       DetailsItem
+    let THIA:       DetailsItem
+    let RIBF:       DetailsItem
+    let NIA:        DetailsItem
+    let VITB6A:     DetailsItem
+    let FOLDFE:     DetailsItem
+    let VITB12:     DetailsItem
+    let VITD:       DetailsItem
+    let TOCPHA:     DetailsItem
+    let VITK1:      DetailsItem
 
 }
 
-struct DetailsTotalNutrients:Decodable{
+struct DetailsItem:Decodable{
     let label:String
     let quantity:Double
     let unit:String

@@ -24,7 +24,33 @@ struct API_INFO {
         }
         return string
     }
+    static func getString(a:Any)->[DetailsItem]{
+        var array = [DetailsItem]()
+        let mirro = Mirror(reflecting: a)
+        var i=0
+        for miro in mirro.children {
+            let mir = miro.value as! DetailsItem
+            
+            if mir.label == "Fat" || mir.label=="Carbs" || mir.label=="Protein" || mir.label.rangeOfCharacter(from: ["V"]) != nil || mir.label == "Energy"{
+                array.insert(mir, at: i)
+                i+=1
+            }else{
+                array.append(miro.value as! DetailsItem)
+                
+            }
+        }
+        return array
+    }
+    static func getDictionary(b:TotalDaily)->[String:DetailsItem]{
+        let itemShowSecond = API_INFO.getString(a: b)
+        var finallArray = [String:DetailsItem]()
+        for i in 0..<itemShowSecond.count {
+            finallArray[itemShowSecond[i].label]=itemShowSecond[i]
+        }
+        return finallArray
+    }
 }
+
 
 
 //hits[0].recipe.label

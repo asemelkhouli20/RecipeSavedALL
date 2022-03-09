@@ -13,11 +13,14 @@ struct RecipeList: View {
         ScrollView{
             LazyVGrid(columns: [GridItem(.adaptive(minimum: 160),spacing: 15)],spacing: 15) {
                 if recipes.count != 0 {
-                    ForEach(1..<recipes.count) { index in
-                        NavigationLink(destination: RecipeDetailsView(recipe: recipes[index])) {
-                            RecipesCard(recipe: recipes[index])
+                    ForEach(recipes) { itemIN in
+                        NavigationLink(destination: RecipeDetailsView(recipe: itemIN)) {
+                            RecipesCard(recipe: itemIN)
+                            
                         }
+                        
                     }
+                    
                 }
                 
             }

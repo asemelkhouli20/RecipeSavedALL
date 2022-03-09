@@ -19,7 +19,7 @@ struct RecipeDetailsView: View {
                     
                     Button {
                         showDetailsView = true
-                    } label: { CustomButton(text: "Calories 1445 for 4 Servings") }
+                    } label: { CustomButton(text: "Calories \( String(format: "%0.0f",recipe.calories)) for \(recipe.yield) Servings") }
                     
                     DescriptionView(meal: API_INFO.getString(array: recipe.mealType) , dish: API_INFO.getString(array: recipe.dishType), cuisine: API_INFO.getString(array: recipe.cuisineType), cautions: API_INFO.getString(array: recipe.cautions))
                     IngredientsView(ingredients: recipe.ingredients)
@@ -36,7 +36,9 @@ struct RecipeDetailsView: View {
                 .offset(x: 0, y: -10)
                 
             }
-            
+            .sheet(isPresented: $showDetailsView) {
+                Details(recipe: recipe)
+            }
             
             
         }

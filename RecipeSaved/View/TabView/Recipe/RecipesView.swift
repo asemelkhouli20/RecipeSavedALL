@@ -29,7 +29,9 @@ struct RecipesView: View {
             .toolbar(content: {
                 ToolbarItem {
                     Button {
-                        
+                        viewModel.isLoading=true
+                        viewModel.recipes=[]
+                        viewModel.fetch(ser: nil)
                     } label: {
                         Label("Refresh", systemImage: "arrow.clockwise")
                     }

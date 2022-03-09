@@ -20,10 +20,11 @@ struct IngredientsCard: View {
             Spacer()
             
             VStack{
-                Text("width")
-                Text(String(format: "%0.2fg",ingredients.weight))
+                Text("Width")
+                Text(String(format: "%0.1fg",ingredients.weight))
             }
             .padding()
+            .frame(minWidth:90)
             .foregroundColor(.white)
             .background(Color("primary"))
             

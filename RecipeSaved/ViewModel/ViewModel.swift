@@ -11,15 +11,15 @@ class ViewModel : ObservableObject {
     @Published var recipes = [Recipe]()
     @Published var isLoading = true
     
+    private var numberofTry = 3
+    
     init(){
-        fetch(ser: nil)
         fetch(ser: nil)
     }
     
     func fetch (ser:String?){
+        numberofTry=3
         guard let url = URL(string: API_INFO.getApi(search: ser)) else {return}
-        print(API_INFO.getApi(search: ser))
-        
         URLSession.shared.dataTask(with: url) { data, _, error in
             
             if let data = data {
@@ -32,10 +32,12 @@ class ViewModel : ObservableObject {
                     }
                     DispatchQueue.main.async {
                         self.isLoading=false
-
                     }
                 }catch{
-                    print("error error")
+                    if self.numberofTry != 0{
+                        self.fetch(ser: ser)
+                        self.numberofTry-=1
+                    }
                 }
                 
             }
