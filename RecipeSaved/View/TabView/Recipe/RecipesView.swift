@@ -15,17 +15,39 @@ struct RecipesView: View {
     var body: some View {
         NavigationView{
             ZStack{
-                if viewModel.isLoading {
+                if viewModel.isLoading{
                     ProgressView()
                         .progressViewStyle(.circular)
                         .scaleEffect(2)
                         .tint(Color("primary"))
                 }else{
-                    RecipeList(recipes: viewModel.recipes)
+                    if viewModel.error{
+                        VStack{
+                            Image("connection_error")
+                                .resizable()
+                                .scaledToFit()
+                            Text("Something wrong check your Internet connection")
+                                .font(.title3)
+                                .fontWeight(.thin)
+                                .multilineTextAlignment(.center)
+                                .padding()
+                        }
+                        
+                    }else{
+                        RecipeList(recipes: viewModel.recipes)
+                            
+                    }
                     
                 }
                 
             }
+            .searchable(text: $search)
+            .onSubmit(of: .search, {
+                viewModel.isLoading=true
+                viewModel.recipes=[]
+                viewModel.fetch(ser: search, fillter: fillter)
+                
+            })
             .halfSheet(showSheet: $showFilter, sheetView: {
                 FilterView(fillter: $fillter, showFilter: $showFilter)
             }, onEnd: {
@@ -35,11 +57,11 @@ struct RecipesView: View {
                 if  fillter != [] {
                     viewModel.isLoading=true
                     viewModel.recipes=[]
-                    
-                    viewModel.fetch(ser: nil, fillter: fillter)
+                    viewModel.fetch(ser: search, fillter: fillter)
                     
                 }
             })
+            
             
             .toolbar(content: {
                 ToolbarItem {
@@ -47,6 +69,7 @@ struct RecipesView: View {
                         viewModel.isLoading=true
                         viewModel.recipes=[]
                         fillter=[String]()
+                        search=""
                         viewModel.fetch(ser: nil, fillter: nil)
                     } label: {
                         Label("Refresh", systemImage: "arrow.clockwise")
@@ -66,7 +89,7 @@ struct RecipesView: View {
                 
             })
             
-            .searchable(text: $search)
+           
             .navigationTitle("Recipes")
             .navigationBarTitleDisplayMode(.inline)
         }

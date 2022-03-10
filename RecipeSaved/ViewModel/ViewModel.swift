@@ -10,6 +10,7 @@ import SwiftUI
 class ViewModel : ObservableObject {
     @Published var recipes = [Recipe]()
     @Published var isLoading = true
+    @Published var error=false
     
     private var numberofTry = 3
     
@@ -21,7 +22,13 @@ class ViewModel : ObservableObject {
         numberofTry=3
         guard let url = URL(string: API_INFO.getApi(search: ser, fillter: fillter)) else {return}
         URLSession.shared.dataTask(with: url) { data, _, error in
-            
+            if error != nil{
+                DispatchQueue.main.async {
+                    self.isLoading=false
+                    self.error=true
+                }
+                
+            }
             if let data = data {
                 do{
                     let task = try JSONDecoder().decode(main.self, from: data)
@@ -37,6 +44,10 @@ class ViewModel : ObservableObject {
                     if self.numberofTry != 0{
                         self.fetch(ser: ser, fillter: fillter)
                         self.numberofTry-=1
+                    }
+                    else{
+                        self.isLoading=false
+                        self.error=true
                     }
                 }
                 

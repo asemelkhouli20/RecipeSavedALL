@@ -14,9 +14,13 @@ struct API_INFO {
     
     
     static func getApi(search:String?,fillter:[String]?)->String{
+        var ser = search
+        if ser == "" || ser == nil {
+            ser = "random"
+        }
         
-        var urlAPI = "https://api.edamam.com/api/recipes/v2?type=public&beta=false&q=\(search ?? "random")&app_id=\(API_ID)&app_key=\(API_KEY)&random=true"
-        if let filter=fillter{
+        var urlAPI = "https://api.edamam.com/api/recipes/v2?type=public&beta=false&q=\(ser!)&app_id=\(API_ID)&app_key=\(API_KEY)&random=true"
+        if let filter=fillter,filter != []{
             
             //in fillterView is :-  fillter=[mealTypePicker,dishTypePicker,cuisineTypePicker]
             let mealType = filter[0]
