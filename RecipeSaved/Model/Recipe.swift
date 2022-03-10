@@ -6,17 +6,17 @@
 //
 
 import Foundation
-struct main:Decodable{
+struct main:Codable{
     let from:Int
     let to:Int
     let count:Int
     let hits:[item]
 }
-struct item:Decodable{
+struct item:Codable{
     let recipe:Recipe
 }
 
-struct Recipe:Decodable,Identifiable {
+struct Recipe:Codable,Identifiable {
     let id=UUID()
     let label:String
     let image:String
@@ -30,23 +30,14 @@ struct Recipe:Decodable,Identifiable {
     let dishType:[String]
     let totalNutrients:TotalNutrients
     let totalDaily:TotalDaily
-    let digest:[Digest]
 }
-struct Ingredients:Decodable{
+struct Ingredients:Codable{
     let text:String
     let weight:Double
     let image:String?
 }
-struct Digest:Decodable{
-    let label:String
-    let schemaOrgTag:String?
-    let total:Double
-    let hasRDI:Bool
-    let daily:Double
-    let unit:String
-    let sub:[Digest]?
-}
-struct TotalNutrients:Decodable{
+
+struct TotalNutrients:Codable{
     let ENERC_KCAL:     DetailsItem
     let FAT:            DetailsItem
     let FASAT:          DetailsItem
@@ -84,7 +75,7 @@ struct TotalNutrients:Decodable{
     let WATER:          DetailsItem
 
 }
-struct TotalDaily:Decodable{
+struct TotalDaily:Codable{
     let ENERC_KCAL: DetailsItem
     let FAT:        DetailsItem
     let FASAT:      DetailsItem
@@ -113,7 +104,7 @@ struct TotalDaily:Decodable{
 
 }
 
-struct DetailsItem:Decodable{
+struct DetailsItem:Codable{
     let label:String
     let quantity:Double
     let unit:String

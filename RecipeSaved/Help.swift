@@ -14,6 +14,7 @@ class Help {
     
     static let cuisineType = ["American","Asian","British","Caribbean","Central Europe","Chinese","Eastern Europe","French","Indian","Italian","Japanese","Kosher","Mediterranean","Mexican","Middle Eastern","Nordic","South American","South East Asian"]
     
+    static let defualt = UserDefaults.standard
     
     static func getString(array:[String])->String{
         var string = ""
@@ -48,4 +49,30 @@ class Help {
         return finallArray
     }
     
+    
+    
+    static func getData(numberOfItem i:Int)->[Recipe]{
+        var recipe:[Recipe]=[]
+        var count = i
+        while (count >= 0) {
+            
+            if let savedRecipe = Help.defualt.object(forKey: "recipe\(count)") as? Data {
+                let decoder = JSONDecoder()
+                if let loadData = try? decoder.decode(Recipe.self, from: savedRecipe){
+                    recipe.append(loadData)
+                }
+            }
+            count-=1
+        }
+        return recipe
+    }
+    
+    static func saveData(save recipe:Recipe,numberOfItem i:Int){
+        
+        let encoder = JSONEncoder()
+        if let encoded = try? encoder.encode(recipe){
+            
+            Help.defualt.set(encoded, forKey: "recipe\(i)")
+        }
+    }
 }

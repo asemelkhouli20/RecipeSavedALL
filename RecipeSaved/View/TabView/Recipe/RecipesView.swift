@@ -34,7 +34,7 @@ struct RecipesView: View {
                         }
                         
                     }else{
-                        RecipeList(recipes: viewModel.recipes)
+                        RecipeList(recipes: viewModel.recipes, isFav: false)
                             
                     }
                     

@@ -9,7 +9,9 @@ import SwiftUI
 
 struct RecipeDetailsView: View {
     var recipe:Recipe
+    @State var isSaved = false
     @State var showDetailsView=false
+    var isFav:Bool
     var body: some View {
         ScrollView{
             VStack(alignment: .leading){
@@ -39,6 +41,40 @@ struct RecipeDetailsView: View {
             .sheet(isPresented: $showDetailsView) {
                 Details(recipe: recipe)
             }
+            
+            .toolbar {
+                ToolbarItem{
+                    if isFav{
+
+                    }else{
+                        Button {
+                            if !isSaved{
+                                if let i = (Help.defualt.value(forKey: "geti") as? Int){
+                                    Help.saveData(save: recipe, numberOfItem: i+1)
+                                    Help.defualt.set(i+1, forKey: "geti")
+                                }
+                                else{
+                                    Help.defualt.set(0, forKey: "geti")
+                                    Help.saveData(save: recipe, numberOfItem: 0)
+                                }
+                                isSaved = true
+                            }
+                            
+                            
+                        } label: {
+                            Label("Save", systemImage: isSaved ? "heart.circle.fill" : "heart.circle")
+                                .font(.title2)
+                                .padding(5)
+                                .background(Color.white)
+                                .clipShape(Circle())
+                        }
+                    }
+                    
+                    
+
+                }
+            }
+            
             
             
         }

@@ -8,26 +8,38 @@
 import SwiftUI
 
 struct HomeView: View {
-    @State private var addPressed = false
+    
+    @State var recipe : [Recipe]?
     var body: some View {
         NavigationView{
-            Text(" favourites")
-                
-                .toolbar {
-                    ToolbarItem{
-                        Button {
-                            addPressed = true
-                        } label: {
-                            Label("Add", systemImage: "plus")
-                        }
-                        .sheet(isPresented: $addPressed) {
-                            AddRecipe()
-                        }
-                    }
-                    
+            ZStack{
+                if recipe != nil {
+                    RecipeList(recipes: recipe!, isFav: true)
                 }
+                if recipe?.count == 0 {
+                    VStack{
+                        Image("fav")
+                            .resizable()
+                            .scaledToFit()
+                        Text("add the meal your like it from home and back to it anytime")
+                            .font(.title3)
+                            .fontWeight(.thin)
+                            .multilineTextAlignment(.center)
+                            .padding()
+                    }
+                }
+            }
+            
+            
+                .onAppear {
+                    let i = Help.defualt.value(forKey: "geti") ?? 0
+                    let data = Help.getData(numberOfItem: i as! Int)
+                        recipe=data
+                }
+                
                 .navigationTitle("Home")
                 .navigationBarTitleDisplayMode(.inline)
+            
         }
         
         .navigationViewStyle(.stack)
