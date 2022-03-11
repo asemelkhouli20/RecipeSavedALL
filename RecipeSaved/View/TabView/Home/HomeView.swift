@@ -8,7 +8,8 @@
 import SwiftUI
 
 struct HomeView: View {
-    
+    @StateObject var viewModel = DataViewModel()
+    @State var alertShow=false
     @State var recipe : [Recipe]?
     var body: some View {
         NavigationView{
@@ -27,21 +28,17 @@ struct HomeView: View {
                             .multilineTextAlignment(.center)
                             .padding()
                     }
-                }
-            }
-            
-            
-                .onAppear {
-                    let i = Help.defualt.value(forKey: "geti") ?? 0
-                    let data = Help.getData(numberOfItem: i as! Int)
-                        recipe=data
+                    
                 }
                 
+            }
+            
+                .onAppear { recipe = viewModel.get() }
                 .navigationTitle("Home")
                 .navigationBarTitleDisplayMode(.inline)
+                
             
         }
-        
         .navigationViewStyle(.stack)
     }
 }

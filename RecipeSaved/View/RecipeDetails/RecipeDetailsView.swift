@@ -8,7 +8,9 @@
 import SwiftUI
 
 struct RecipeDetailsView: View {
+    
     var recipe:Recipe
+    @StateObject var viewModel = DataViewModel()
     @State var isSaved = false
     @State var showDetailsView=false
     var isFav:Bool
@@ -44,19 +46,19 @@ struct RecipeDetailsView: View {
             
             .toolbar {
                 ToolbarItem{
-                    if isFav{
+                    if isFav {
+                        Button {
+                            
+                            viewModel.delete(recipe.label)
+                            
+                        } label: {
+                            Text("delete")
+                        }
 
                     }else{
                         Button {
                             if !isSaved{
-                                if let i = (Help.defualt.value(forKey: "geti") as? Int){
-                                    Help.saveData(save: recipe, numberOfItem: i+1)
-                                    Help.defualt.set(i+1, forKey: "geti")
-                                }
-                                else{
-                                    Help.defualt.set(0, forKey: "geti")
-                                    Help.saveData(save: recipe, numberOfItem: 0)
-                                }
+                                viewModel.save(recipe)
                                 isSaved = true
                             }
                             
@@ -69,6 +71,9 @@ struct RecipeDetailsView: View {
                                 .clipShape(Circle())
                         }
                     }
+                
+                        
+                   
                     
                     
 

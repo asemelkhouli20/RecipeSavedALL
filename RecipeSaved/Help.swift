@@ -59,6 +59,7 @@ class Help {
             if let savedRecipe = Help.defualt.object(forKey: "recipe\(count)") as? Data {
                 let decoder = JSONDecoder()
                 if let loadData = try? decoder.decode(Recipe.self, from: savedRecipe){
+                    
                     recipe.append(loadData)
                 }
             }
@@ -71,7 +72,7 @@ class Help {
         
         let encoder = JSONEncoder()
         if let encoded = try? encoder.encode(recipe){
-            
+            print(encoded.customMirror.subjectType)
             Help.defualt.set(encoded, forKey: "recipe\(i)")
         }
     }
