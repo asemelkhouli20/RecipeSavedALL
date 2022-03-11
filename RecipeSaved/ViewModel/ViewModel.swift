@@ -35,8 +35,6 @@ class ViewModel : ObservableObject {
                     for item in task.hits {
                         DispatchQueue.main.async {
                             self.recipes.append(item.recipe)
-                            //let obj = CoreDataManger()
-                            //obj.save(recipe: self.recipes[0])
                         }
                     }
                     DispatchQueue.main.async {

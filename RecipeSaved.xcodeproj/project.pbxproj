@@ -23,8 +23,8 @@
 		D5F334D327D22DC000C97E59 /* ContentView.swift in Sources */ = {isa = PBXBuildFile; fileRef = D5F334D227D22DC000C97E59 /* ContentView.swift */; };
 		D5F334D527D22DC100C97E59 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = D5F334D427D22DC100C97E59 /* Assets.xcassets */; };
 		D5F334D827D22DC100C97E59 /* Preview Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = D5F334D727D22DC100C97E59 /* Preview Assets.xcassets */; };
-		D5F334E227D22FD900C97E59 /* RecipesView.swift in Sources */ = {isa = PBXBuildFile; fileRef = D5F334E127D22FD900C97E59 /* RecipesView.swift */; };
-		D5F334E827D2334F00C97E59 /* HomeView.swift in Sources */ = {isa = PBXBuildFile; fileRef = D5F334E727D2334F00C97E59 /* HomeView.swift */; };
+		D5F334E227D22FD900C97E59 /* HomeView.swift in Sources */ = {isa = PBXBuildFile; fileRef = D5F334E127D22FD900C97E59 /* HomeView.swift */; };
+		D5F334E827D2334F00C97E59 /* favouriteView.swift in Sources */ = {isa = PBXBuildFile; fileRef = D5F334E727D2334F00C97E59 /* favouriteView.swift */; };
 		D5F334F027D29A4900C97E59 /* API_INFO.swift in Sources */ = {isa = PBXBuildFile; fileRef = D5F334EF27D29A4900C97E59 /* API_INFO.swift */; };
 		D5F334F427D29E7F00C97E59 /* RecipesCard.swift in Sources */ = {isa = PBXBuildFile; fileRef = D5F334F327D29E7F00C97E59 /* RecipesCard.swift */; };
 		D5F334F727D2B07000C97E59 /* RecipeList.swift in Sources */ = {isa = PBXBuildFile; fileRef = D5F334F627D2B07000C97E59 /* RecipeList.swift */; };
@@ -49,8 +49,8 @@
 		D5F334D227D22DC000C97E59 /* ContentView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ContentView.swift; sourceTree = "<group>"; };
 		D5F334D427D22DC100C97E59 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		D5F334D727D22DC100C97E59 /* Preview Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = "Preview Assets.xcassets"; sourceTree = "<group>"; };
-		D5F334E127D22FD900C97E59 /* RecipesView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RecipesView.swift; sourceTree = "<group>"; };
-		D5F334E727D2334F00C97E59 /* HomeView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HomeView.swift; sourceTree = "<group>"; };
+		D5F334E127D22FD900C97E59 /* HomeView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HomeView.swift; sourceTree = "<group>"; };
+		D5F334E727D2334F00C97E59 /* favouriteView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = favouriteView.swift; sourceTree = "<group>"; };
 		D5F334EF27D29A4900C97E59 /* API_INFO.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = API_INFO.swift; sourceTree = "<group>"; };
 		D5F334F327D29E7F00C97E59 /* RecipesCard.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RecipesCard.swift; sourceTree = "<group>"; };
 		D5F334F627D2B07000C97E59 /* RecipeList.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RecipeList.swift; sourceTree = "<group>"; };
@@ -76,12 +76,12 @@
 			path = Component;
 			sourceTree = "<group>";
 		};
-		D54B396C27D7980100E5DE0D /* Home */ = {
+		D54B396C27D7980100E5DE0D /* Favourite */ = {
 			isa = PBXGroup;
 			children = (
-				D5F334E727D2334F00C97E59 /* HomeView.swift */,
+				D5F334E727D2334F00C97E59 /* favouriteView.swift */,
 			);
-			path = Home;
+			path = Favourite;
 			sourceTree = "<group>";
 		};
 		D54B396D27D7989E00E5DE0D /* RecipeDetails */ = {
@@ -97,6 +97,8 @@
 		D5ED047B27DB85DA0079A42C /* Managers */ = {
 			isa = PBXGroup;
 			children = (
+				D5404CE127DBCB06003F38E3 /* RecipeModel+CoreDataClass.swift */,
+				D5404CE227DBCB06003F38E3 /* RecipeModel+CoreDataProperties.swift */,
 				D5ED047C27DB86030079A42C /* CoreDataManger.swift */,
 			);
 			path = Managers;
@@ -113,8 +115,6 @@
 		D5F334C427D22DBF00C97E59 = {
 			isa = PBXGroup;
 			children = (
-				D5404CE127DBCB06003F38E3 /* RecipeModel+CoreDataClass.swift */,
-				D5404CE227DBCB06003F38E3 /* RecipeModel+CoreDataProperties.swift */,
 				D5F334CF27D22DC000C97E59 /* RecipeSaved */,
 				D5F334CE27D22DC000C97E59 /* Products */,
 			);
@@ -185,8 +185,8 @@
 			isa = PBXGroup;
 			children = (
 				D5F334F227D29E5A00C97E59 /* Component */,
-				D54B396C27D7980100E5DE0D /* Home */,
-				D5F334F527D2B03800C97E59 /* Recipe */,
+				D54B396C27D7980100E5DE0D /* Favourite */,
+				D5F334F527D2B03800C97E59 /* Home */,
 			);
 			path = TabView;
 			sourceTree = "<group>";
@@ -200,13 +200,13 @@
 			path = Component;
 			sourceTree = "<group>";
 		};
-		D5F334F527D2B03800C97E59 /* Recipe */ = {
+		D5F334F527D2B03800C97E59 /* Home */ = {
 			isa = PBXGroup;
 			children = (
-				D5F334E127D22FD900C97E59 /* RecipesView.swift */,
+				D5F334E127D22FD900C97E59 /* HomeView.swift */,
 				D516A51427D9158B00CB4971 /* FilterView.swift */,
 			);
-			path = Recipe;
+			path = Home;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -280,7 +280,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				D5F334F027D29A4900C97E59 /* API_INFO.swift in Sources */,
-				D5F334E227D22FD900C97E59 /* RecipesView.swift in Sources */,
+				D5F334E227D22FD900C97E59 /* HomeView.swift in Sources */,
 				D5404CD427DBB5A7003F38E3 /* DataViewModel.swift in Sources */,
 				D5F334D327D22DC000C97E59 /* ContentView.swift in Sources */,
 				D5F334F727D2B07000C97E59 /* RecipeList.swift in Sources */,
@@ -288,7 +288,7 @@
 				D54B397127D7A8C400E5DE0D /* Details.swift in Sources */,
 				D54B396F27D798D300E5DE0D /* IngredientsCard.swift in Sources */,
 				D5404CE327DBCB06003F38E3 /* RecipeModel+CoreDataClass.swift in Sources */,
-				D5F334E827D2334F00C97E59 /* HomeView.swift in Sources */,
+				D5F334E827D2334F00C97E59 /* favouriteView.swift in Sources */,
 				D5F334F927D2B6FF00C97E59 /* RecipeDetailsView.swift in Sources */,
 				D5ED047227DACD850079A42C /* RecipeModelCoreData.xcdatamodeld in Sources */,
 				D5F334D127D22DC000C97E59 /* RecipeSavedApp.swift in Sources */,

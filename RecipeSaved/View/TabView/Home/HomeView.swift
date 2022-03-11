@@ -1,5 +1,5 @@
 //
-//  FavouritesView.swift
+//  HomeView.swift
 //  RecipeSaved
 //
 //  Created by Asem on 04/03/2022.
@@ -8,42 +8,98 @@
 import SwiftUI
 
 struct HomeView: View {
-    @StateObject var viewModel = DataViewModel()
-    @State var alertShow=false
-    @State var recipe : [Recipe]?
+    @State private var search = ""
+    @State private var showFilter=false
+    @State var fillter=[String]()
+    @StateObject var viewModel = ViewModel()
     var body: some View {
         NavigationView{
             ZStack{
-                if recipe != nil {
-                    RecipeList(recipes: recipe!, isFav: true)
-                }
-                if recipe?.count == 0 {
-                    VStack{
-                        Image("fav")
-                            .resizable()
-                            .scaledToFit()
-                        Text("add the meal your like it from home and back to it anytime")
-                            .font(.title3)
-                            .fontWeight(.thin)
-                            .multilineTextAlignment(.center)
-                            .padding()
+                if viewModel.isLoading{
+                    ProgressView()
+                        .progressViewStyle(.circular)
+                        .scaleEffect(2)
+                        .tint(Color("primary"))
+                }else{
+                    if viewModel.error{
+                        VStack{
+                            Image("connection_error")
+                                .resizable()
+                                .scaledToFit()
+                            Text("Something wrong check your Internet connection")
+                                .font(.title3)
+                                .fontWeight(.thin)
+                                .multilineTextAlignment(.center)
+                                .padding()
+                        }
+                        
+                    }else{
+                        RecipeList(recipes: viewModel.recipes, isFav: false)
+                            
                     }
                     
                 }
                 
             }
-            
-                .onAppear { recipe = viewModel.get() }
-                .navigationTitle("Home")
-                .navigationBarTitleDisplayMode(.inline)
+            .searchable(text: $search)
+            .onSubmit(of: .search, {
+                viewModel.isLoading=true
+                viewModel.recipes=[]
+                viewModel.fetch(ser: search, fillter: fillter)
                 
+            })
+            .halfSheet(showSheet: $showFilter, sheetView: {
+                FilterView(fillter: $fillter, showFilter: $showFilter)
+            }, onEnd: {
+                
+            })
+            .onChange(of: fillter, perform: { newValue in
+                if  fillter != [] {
+                    viewModel.isLoading=true
+                    viewModel.recipes=[]
+                    viewModel.fetch(ser: search, fillter: fillter)
+                    
+                }
+            })
             
+            
+            .toolbar(content: {
+                ToolbarItem {
+                    Button {
+                        viewModel.isLoading=true
+                        viewModel.recipes=[]
+                        fillter=[String]()
+                        search=""
+                        viewModel.fetch(ser: nil, fillter: nil)
+                    } label: {
+                        Label("Refresh", systemImage: "arrow.clockwise")
+                    }
+                    
+                }
+                
+                ToolbarItem(placement: .navigationBarLeading) {
+                    Button {
+                        showFilter=true
+                    } label: {
+                        Label("Filter", systemImage: "line.3.horizontal.decrease")
+                    }
+
+                    
+                }
+                
+            })
+            
+           
+            .navigationTitle("Recipes")
+            .navigationBarTitleDisplayMode(.inline)
         }
+        
         .navigationViewStyle(.stack)
+        
     }
 }
 
-struct FavouritesView_Previews: PreviewProvider {
+struct HomeView_Previews: PreviewProvider {
     static var previews: some View {
         HomeView()
     }

@@ -41,10 +41,3 @@ struct RecipesCard: View {
         
     }
 }
-//
-//struct RecipesCard_Previews: PreviewProvider {
-//    static var previews: some View {
-//        RecipesCard(recipe: RecipeModel.MockData)
-//            .preferredColorScheme(.dark)
-//    }
-//}

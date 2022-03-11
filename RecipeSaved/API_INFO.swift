@@ -8,7 +8,7 @@
 import Foundation
 
 struct API_INFO {
-    
+    //to get API_KEY & API_ID go to https://www.edamam.com/ and choose Recipe Search API and sign in and get your API
     static let API_KEY = "ef816e5fbc756632771868a28fbf5d54"
     static let API_ID = "7b0337dd"
     

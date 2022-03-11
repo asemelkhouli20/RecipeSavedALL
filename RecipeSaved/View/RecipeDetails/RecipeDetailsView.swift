@@ -87,12 +87,6 @@ struct RecipeDetailsView: View {
     }
 }
 
-//struct RecipeDetailsView_Previews: PreviewProvider {
-//    static var previews: some View {
-//        RecipeDetailsView(recipe: RecipeModel.MockData)
-//            .preferredColorScheme(.dark)
-//    }
-//}
 
 
 

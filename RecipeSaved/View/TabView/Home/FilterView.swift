@@ -43,13 +43,6 @@ struct FilterView: View {
         
     }
 }
-//
-//struct FilterView_Previews: PreviewProvider {
-//    static var previews: some View {
-//        FilterView()
-//    }
-//}
-
 struct filterType: View {
     @Binding var picker:String
     var array:[String]

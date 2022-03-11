@@ -71,15 +71,6 @@ struct Details: View {
         
     }
 }
-//
-//struct Details_Previews: PreviewProvider {
-//    static var previews: some View {
-//        Details()
-//    }
-//}
-//
-
-
 struct CustomItemView: View {
     var name:String
     var unit:String

@@ -30,31 +30,19 @@ struct IngredientsCard: View {
             
         }
         .frame(maxWidth:.infinity)
-        .overlay(RoundedRectangle(cornerRadius: 5,style: .continuous)
-                    .stroke(Color("primary"),lineWidth: 1)
-        )
+        .overlay(RoundedRectangle(cornerRadius: 5,style: .continuous).stroke(Color("primary"),lineWidth: 1))
         
     }
 }
 
-//struct IngredientsCard_Previews: PreviewProvider {
-//    static var previews: some View {
-//        IngredientsCard()
-//            .preferredColorScheme(.dark)
-//    }
-//}
 
 struct ImageCoverCompont: View {
     var image:String?
     var body: some View {
         AsyncImage(url: URL(string:image ?? "")) { image in
-            image
-                .resizable()
-                .scaledToFit()
-            
+            image.resizable().scaledToFit()
         } placeholder: {
-            Image(systemName: "photo.circle.fill")
-                .resizable()
+            Image(systemName: "photo.circle.fill").resizable()
             
         }
        

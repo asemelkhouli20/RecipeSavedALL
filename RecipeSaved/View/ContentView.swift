@@ -11,13 +11,13 @@ struct ContentView: View {
     
     var body: some View {
         TabView{
-            RecipesView()
-                .tabItem {
-                    Label("Rcipe", systemImage: "network")
-                }
             HomeView()
                 .tabItem {
                     Label("Home", systemImage: "house")
+                }
+            favouriteView()
+                .tabItem {
+                    Label("Favourite", systemImage: "heart")
                 }
            
         }
