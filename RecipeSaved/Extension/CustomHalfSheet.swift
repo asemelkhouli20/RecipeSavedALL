@@ -24,6 +24,7 @@ struct HalfSheefHelper<SheetView:View>:UIViewControllerRepresentable{
     var onEnd:()->()
     
     let controller=UIViewController()
+    
     func makeCoordinator() -> Coordinator { return Coordinator(parent: self) }
     
     func makeUIViewController(context: Context) ->  UIViewController {

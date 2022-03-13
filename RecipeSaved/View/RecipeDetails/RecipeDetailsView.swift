@@ -9,11 +9,16 @@ import SwiftUI
 
 struct RecipeDetailsView: View {
     
+    @FetchRequest(sortDescriptors: []) var data : FetchedResults<RecipeModel>
+    @Environment(\.managedObjectContext) var moc
+    
     var recipe:Recipe
-    @StateObject var viewModel = DataViewModel()
+    
     @State var isSaved = false
     @State var showDetailsView=false
-    var isFav:Bool
+    
+    @Binding var isFav:Bool
+    
     var body: some View {
         ScrollView{
             VStack(alignment: .leading){
@@ -48,20 +53,25 @@ struct RecipeDetailsView: View {
                 ToolbarItem{
                     if isFav {
                         Button {
-                            
-                            viewModel.delete(recipe.label)
-                            
+                            //delete item from CoreData and make it unFav and than out
+                            for item in data {
+                                if item.lable == recipe.label { moc.delete(item);try? moc.save(); isFav = false; break } }
                         } label: {
-                            Text("delete")
+                            Label("Delete", systemImage: "trash.fill")
+                                .font(.headline)
+                                .padding(8)
+                                .background(Color.white)
+                                .clipShape(Circle())
                         }
 
                     }else{
                         Button {
                             if !isSaved{
-                                viewModel.save(recipe)
-                                isSaved = true
+                                // create new data and add it to coreData
+                                let new = RecipeModel(context: moc); new.base = Help.encoderData(save: recipe)!; new.lable = recipe.label; try? moc.save()
+                                //change the status
+                                isFav = true; isSaved = true
                             }
-                            
                             
                         } label: {
                             Label("Save", systemImage: isSaved ? "heart.circle.fill" : "heart.circle")

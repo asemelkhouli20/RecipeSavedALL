@@ -29,51 +29,28 @@ class Help {
         var i=0
         for miro in mirro.children {
             let mir = miro.value as! DetailsItem
-            
-            if mir.label == "Fat" || mir.label=="Carbs" || mir.label=="Protein" || mir.label.rangeOfCharacter(from: ["V"]) != nil || mir.label == "Energy"{
-                array.insert(mir, at: i)
-                i+=1
-            }else{
-                array.append(miro.value as! DetailsItem)
-                
-            }
+            //make sure all colour elment to be on the top of array
+            if mir.label == "Fat" || mir.label=="Carbs" || mir.label=="Protein" || mir.label.rangeOfCharacter(from: ["V"]) != nil || mir.label == "Energy"{ array.insert(mir, at: i); i+=1
+            }else{ array.append(miro.value as! DetailsItem) }
         }
         return array
     }
     static func getDictionary(b:TotalDaily)->[String:DetailsItem]{
         let itemShowSecond = Help.getString(a: b)
         var finallArray = [String:DetailsItem]()
-        for i in 0..<itemShowSecond.count {
-            finallArray[itemShowSecond[i].label]=itemShowSecond[i]
-        }
+        for i in 0..<itemShowSecond.count { finallArray[itemShowSecond[i].label]=itemShowSecond[i] }
         return finallArray
     }
     
     
     
-    static func getData(numberOfItem i:Int)->[Recipe]{
-        var recipe:[Recipe]=[]
-        var count = i
-        while (count >= 0) {
-            
-            if let savedRecipe = Help.defualt.object(forKey: "recipe\(count)") as? Data {
-                let decoder = JSONDecoder()
-                if let loadData = try? decoder.decode(Recipe.self, from: savedRecipe){
-                    
-                    recipe.append(loadData)
-                }
-            }
-            count-=1
-        }
-        return recipe
+    static func getData(data:Data)->Recipe?{
+        if let decodar = try? JSONDecoder().decode(Recipe.self, from: data){ return decodar }
+        return nil
     }
     
-    static func saveData(save recipe:Recipe,numberOfItem i:Int){
-        
-        let encoder = JSONEncoder()
-        if let encoded = try? encoder.encode(recipe){
-            print(encoded.customMirror.subjectType)
-            Help.defualt.set(encoded, forKey: "recipe\(i)")
-        }
+    static func encoderData(save recipe:Recipe)->Data?{
+        if let encoded = try? JSONEncoder().encode(recipe){ return encoded }
+        return nil
     }
 }

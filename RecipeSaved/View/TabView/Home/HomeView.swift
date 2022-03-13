@@ -9,9 +9,14 @@ import SwiftUI
 
 struct HomeView: View {
     @State private var search = ""
+    
     @State private var showFilter=false
+    
     @State var fillter=[String]()
+    
     @StateObject var viewModel = ViewModel()
+    
+    @State var not = false
     var body: some View {
         NavigationView{
             ZStack{
@@ -34,7 +39,7 @@ struct HomeView: View {
                         }
                         
                     }else{
-                        RecipeList(recipes: viewModel.recipes, isFav: false)
+                        RecipeList(recipes: viewModel.recipes, isFav: $not)
                             
                     }
                     
@@ -89,7 +94,9 @@ struct HomeView: View {
                 
             })
             
-           
+            .onAppear(perform: {
+                not = false
+            })
             .navigationTitle("Recipes")
             .navigationBarTitleDisplayMode(.inline)
         }

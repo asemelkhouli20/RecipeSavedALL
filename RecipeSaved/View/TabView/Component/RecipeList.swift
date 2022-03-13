@@ -9,13 +9,13 @@ import SwiftUI
 
 struct RecipeList: View {
     var recipes : [Recipe]=[]
-    var isFav:Bool
+    @Binding var isFav:Bool
     var body: some View {
             if recipes.count != 0 {
                 ScrollView{
                 LazyVGrid(columns: [GridItem(.adaptive(minimum: 160),spacing: 15)],spacing: 15) {
                     ForEach(recipes) { itemIN in
-                        NavigationLink(destination: RecipeDetailsView(recipe: itemIN, isFav: isFav)) { RecipesCard(recipe: itemIN) }
+                        NavigationLink(destination: RecipeDetailsView(recipe: itemIN, isFav: $isFav)) { RecipesCard(recipe: itemIN) }
                     }
                     
                 }
@@ -39,13 +39,5 @@ struct RecipeList: View {
             }
           
         
-    }
-}
-
-struct RecipeList_Previews: PreviewProvider {
-    static var previews: some View {
-        NavigationView{
-            RecipeList(isFav: false)
-        }
     }
 }
