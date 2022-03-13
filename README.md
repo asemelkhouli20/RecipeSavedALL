@@ -24,6 +24,6 @@ and ipad on dark mood
 https://user-images.githubusercontent.com/94296784/157947914-6545061d-f3b5-49e5-8451-b083f75857cd.mp4
 
 
-//Something add to app not on video/n
-the delete button become trash imag and on click it change to fav button and you can save it again if you delete it Accidentally and the same thing in fav it will. be delete /n
+//Something add to app not on video \n
+the delete button become trash imag and on click it change to fav button and you can save it again if you delete it Accidentally and the same thing in fav it will. be delete \n
 and coreData change it but it is the same functionality so nothing change on the interface about this 
