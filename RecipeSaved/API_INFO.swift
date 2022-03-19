@@ -9,14 +9,21 @@ import Foundation
 
 struct API_INFO {
     //to get API_KEY & API_ID go to https://www.edamam.com/ and choose Recipe Search API and sign in and get your API
-    static let API_KEY = "ef816e5fbc756632771868a28fbf5d54"
-    static let API_ID = "7b0337dd"
+    static let API_KEY = ""
+    static let API_ID = ""
     
     
     static func getApi(search:String?,fillter:[String]?)->String{
         //make search is valid to API url
         var ser = search
-        if ser == "" || ser == nil { ser = "random" }
+        if ser == "" || ser == nil { 
+            ser = "random" 
+        }else{
+            //delete all extra space
+            while(ser!.last == " ") { ser = String(ser!.dropLast()) }
+            //make search valid to API
+            ser = ser!.replacingOccurrences(of: " ", with: "%20")
+        }
         //make basic  API url
         var urlAPI = "https://api.edamam.com/api/recipes/v2?type=public&beta=false&q=\(ser!)&app_id=\(API_ID)&app_key=\(API_KEY)&random=true"
         //add fillter to API url
