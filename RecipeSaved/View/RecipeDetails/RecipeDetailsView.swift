@@ -55,7 +55,7 @@ struct RecipeDetailsView: View {
                         Button {
                             //delete item from CoreData and make it unFav and than out
                             for item in data {
-                                if item.lable == recipe.label { moc.delete(item);try? moc.save(); isFav = false; break } }
+                                if item.lable == recipe.label { moc.delete(item);try? moc.save(); isFav = false;isSaved = false; break } }
                         } label: {
                             Label("Delete", systemImage: "trash.fill")
                                 .font(.headline)
